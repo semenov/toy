@@ -7,6 +7,7 @@ module.exports = function(app) {
 	return {
 		render: function() {
 			var postComponents = this.props.posts.map(function(post) {
+				post.key = post.id;
 				return Post(post);
 			});
 

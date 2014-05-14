@@ -14,6 +14,7 @@ module.exports = function(params) {
 			var componentPath = 'components/' + componentName + '/' + componentName;
 			var componentConstructor = app.require(componentPath);
 			var componentDeclaration = componentConstructor(app);
+			componentDeclaration.displayName = componentName;
 
 			component = React.createClass(componentDeclaration);
 			components[componentName] = component;
