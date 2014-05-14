@@ -1,0 +1,26 @@
+{
+  "name": "toy",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "~0.10.0",
+    "underscore": "~1.6.0",
+    "express": "~4.1.2",
+    "yargs": "~1.2.1",
+    "crossroads": "~0.12.0"
+  },
+  "devDependencies": {
+    "gulp-concat": "~2.2.0",
+    "gulp": "~3.6.2",
+    "browserify": "~4.1.2",
+    "vinyl-source-stream": "~0.1.1",
+    "glob": "~3.2.9",
+    "gulp-livereload": "~1.5.0"
+  }
+}
