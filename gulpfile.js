@@ -2,45 +2,46 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
-var express = require('express');
 var livereload = require('gulp-livereload');
 var fs = require('fs');
 var yargs = require('yargs');
 var glob = require('glob');
 
 var paths = {
-	scripts: ['run.js', './core/*.js', './components/**/*.js'],
+	scripts: ['run.js', './core/*.js', './app/*.js', './components/**/*.js'],
 	styles: './components/**/*.css'
 }
 
 gulp.task('scripts', function() {
 	var componentFiles = glob.sync('./components/**/*.js');
+	var appFiles = glob.sync('./app/*.js');
+	var files = componentFiles.concat(appFiles);
+
 	var b = browserify({
 		basedir: __dirname
 	});
 
 	b.add('./run.js');
-	componentFiles.forEach(function(file) {
+	files.forEach(function(file) {
 		b.require(file);
 	});
 
     b.bundle({ debug: true })
-		.pipe(source('app.js'))
+		.pipe(source('bundle.js'))
 		.pipe(gulp.dest('./public/assets'))
 		.pipe(livereload());
 });
 
 gulp.task('styles', function() {
 	gulp.src(paths.styles)
-		.pipe(concat('app.css'))
+		.pipe(concat('bundle.css'))
 		.pipe(gulp.dest('./public/assets'))
 		.pipe(livereload());
 });
 
 gulp.task('serve', function() {
-	var app = express();
-	app.use(express.static(__dirname + '/public'));
-	app.listen(3000);
+	var server = require('./core/server');
+	server.run();
 });
 
 gulp.task('dev', function() {

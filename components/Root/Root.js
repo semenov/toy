@@ -7,8 +7,10 @@ module.exports = function(app) {
 
 	return {
 		render: function() {
-			return html.div({className: 'App'},
-				PostsList(data.common)
+			return (
+				html.div({className: 'App'},
+					PostsList(data.common)
+				)
 			);
 		}
 	};

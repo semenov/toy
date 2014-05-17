@@ -9,8 +9,17 @@ function run() {
 
 	var Root = app.component('Root');
 
-
 	React.renderComponent(Root(), document.body);
+
+	function go() {
+		var url = document.location.pathname;
+		console.log('I see url', url);
+		app.router.go(url);
+	}
+
+	window.onpopstate = go;
+
+	go();
 }
 
 document.addEventListener('DOMContentLoaded', run);
